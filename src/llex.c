@@ -319,6 +319,12 @@ int luaX_lex (LexState *LS, SemInfo *seminfo) {
         inclinenumber(LS);
         continue;
       }
+      case '#': {
+        /* short comment */
+        while (LS->current != '\n' && LS->current != EOZ)
+          next(LS);
+        continue;
+      }
       case '-': {
         next(LS);
         if (LS->current != '-') return '-';

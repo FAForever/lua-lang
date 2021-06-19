@@ -1,4 +1,9 @@
-This is Lua 5.0.
+This is Lua 5.0 FAF version.
+
+* Changes from version 5.0 to FAF
+  -------------------------------
+  Language:
+  + new single line comment: # ...
 
 * Changes from version 4.0 to 5.0
   -------------------------------
