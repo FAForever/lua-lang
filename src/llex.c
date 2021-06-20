@@ -63,7 +63,7 @@ void luaX_errorline (LexState *ls, const char *s, const char *token, int line) {
   lua_State *L = ls->L;
   char buff[MAXSRC];
   luaO_chunkid(buff, getstr(ls->source), MAXSRC);
-  luaO_pushfstring(L, "%s:%d: %s near `%s'", buff, line, s, token); 
+  luaO_pushfstring(L, "%s:%d: %s near `%s'", buff, line, s, token);
   luaD_throw(L, LUA_ERRSYNTAX);
 }
 
@@ -360,9 +360,11 @@ int luaX_lex (LexState *LS, SemInfo *seminfo) {
         if (LS->current != '=') return '>';
         else { next(LS); return TK_GE; }
       }
-      case '~': {
+      case '~':
+      case '!': {
+        char tok = LS->current;
         next(LS);
-        if (LS->current != '=') return '~';
+        if (LS->current != '=') return tok;
         else { next(LS); return TK_NE; }
       }
       case '"':
