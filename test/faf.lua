@@ -56,3 +56,8 @@ while i < 10 do
 end
 assert(k == 5)
 print("passed continue in while")
+
+assert(0x0 == 0)
+assert(0x1234 == 4660)
+assert(0x2p30 == 2147483648)
+print("passed hex literal")

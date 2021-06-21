@@ -3,6 +3,7 @@ This is Lua 5.0 FAF version.
 * Changes from version 5.0 to FAF
   -------------------------------
   Language:
+  + hexidecimal number literals
   + new keyword `continue'
   + new inequality operator: !=
   + new single line comment: # ...

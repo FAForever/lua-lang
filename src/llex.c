@@ -170,11 +170,40 @@ static size_t readname (LexState *LS) {
 }
 
 
+/* Hex LUA_NUMBER */
+static void read_xnumeral (LexState *LS, SemInfo *seminfo, size_t l) {
+  while (isxdigit(LS->current)) {
+    checkbuffer(LS, l);
+    save_and_next(LS, l);
+  }
+  if (LS->current == 'p' || LS->current == 'P') {
+    save_and_next(LS, l);  /* read `P' */
+    if (LS->current == '+' || LS->current == '-')
+      save_and_next(LS, l);  /* optional exponent sign */
+    while (isxdigit(LS->current)) {
+      checkbuffer(LS, l);
+      save_and_next(LS, l);
+    }
+  }
+  save(LS, '\0', l);
+  if (!luaO_str2d(luaZ_buffer(LS->buff), &seminfo->r))
+    luaX_lexerror(LS, "malformed hex number", TK_NUMBER);
+}
+
+
 /* LUA_NUMBER */
 static void read_numeral (LexState *LS, int comma, SemInfo *seminfo) {
   size_t l = 0;
   checkbuffer(LS, l);
   if (comma) save(LS, '.', l);
+  else if (LS->current == '0') {
+      save_and_next(LS, l);
+      if (LS->current == 'x' || LS->current == 'X') {
+        save_and_next(LS, l);
+        read_xnumeral(LS, seminfo, l);
+        return;
+      }
+  }
   while (isdigit(LS->current)) {
     checkbuffer(LS, l);
     save_and_next(LS, l);
