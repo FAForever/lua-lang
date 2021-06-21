@@ -18,7 +18,8 @@
 #define LUA_COPYRIGHT	"Copyright (C) 1994-2006 Tecgraf, PUC-Rio"
 #define LUA_AUTHORS 	"R. Ierusalimschy, L. H. de Figueiredo & W. Celes"
 
-
+/* binary files start with "<esc>Lua" */
+#define	LUA_SIGNATURE	"\033Lua"
 
 /* option for multiple returns in `lua_pcall' and `lua_call' */
 #define LUA_MULTRET	(-1)
@@ -221,7 +222,7 @@ LUA_API void  lua_concat (lua_State *L, int n);
 
 
 
-/* 
+/*
 ** ===============================================================
 ** some useful macros
 ** ===============================================================
