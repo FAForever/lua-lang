@@ -1,6 +1,9 @@
 ![logo](doc/logo.gif)
 
 # Lua FAForever version
+![Build Status](https://github.com/FAForever/lua-lang/actions/workflows/test.yml/badge.svg?branch=lua-5.0)
+[![license](https://img.shields.io/badge/license-MIT-blue)](COPYRIGHT)
+
 This is a modified version of Lua which imitates the changes made by Gas Powered
 Games (GPG) for the game Supreme Commander Forged Alliance (SCFA).
 

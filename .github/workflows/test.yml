@@ -1,0 +1,36 @@
+# Run unit tests
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # Tests
+  unit-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build lua
+        run: make \
+          MYCFLAGS='-O3 -fomit-frame-pointer' \
+          EXTRA_LIBS='-lm -ldl' \
+          NUMBER='-DLUA_USER_H="\"../etc/luser_number.h"\" -DUSE_FLOAT'
+
+      - name: Run tests
+        run: ./bin/lua test/faf.lua
+
+  docker-build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Build docker image
+          run: docker build --build-arg GITHUB_REF -t test_image .
+
+        - name: Test image
+          run: |
+            docker run --rm -d -p 8001:8001 test_image
+            nc -z localhost 8001
