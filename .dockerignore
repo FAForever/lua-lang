@@ -1,0 +1,13 @@
+# Build artifacts
+**/*.o
+**/*.a
+
+# Clutter
+doc
+!doc/*.1
+test
+!test/faf.lua
+
+# Git
+.git
+.github

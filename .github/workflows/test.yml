@@ -31,6 +31,4 @@ jobs:
           run: docker build --build-arg GITHUB_REF -t test_image .
 
         - name: Test image
-          run: |
-            docker run --rm -d -p 8001:8001 test_image
-            nc -z localhost 8001
+          run: docker run --rm test_image lua -e "print('Hello World')"
