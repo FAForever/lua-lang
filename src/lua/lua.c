@@ -143,7 +143,7 @@ static int lcall (int narg, int clear) {
 
 
 static void print_version (void) {
-  l_message(NULL, LUA_VERSION "  " LUA_COPYRIGHT);
+  l_message(NULL, LUA_VERSION "  " LUA_COPYRIGHT "\n" LUA_MODIFIED);
 }
 
 
@@ -435,4 +435,3 @@ int main (int argc, char *argv[]) {
   lua_close(l);
   return (status || s.status) ? EXIT_FAILURE : EXIT_SUCCESS;
 }
-

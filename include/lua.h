@@ -14,9 +14,10 @@
 #include <stddef.h>
 
 
-#define LUA_VERSION	"Lua 5.0.3"
+#define LUA_VERSION	"FAF Lua 5.0-0"
 #define LUA_COPYRIGHT	"Copyright (C) 1994-2006 Tecgraf, PUC-Rio"
 #define LUA_AUTHORS 	"R. Ierusalimschy, L. H. de Figueiredo & W. Celes"
+#define LUA_MODIFIED  "Modified 2021 by Askaholic"
 
 /* binary files start with "<esc>Lua" */
 #define	LUA_SIGNATURE	"\033Lua"

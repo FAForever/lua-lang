@@ -97,7 +97,7 @@ static int doargs(int argc, char* argv[])
    stripping=1;
   else if (IS("-v"))			/* show version */
   {
-   printf("%s  %s\n",LUA_VERSION,LUA_COPYRIGHT);
+   printf("%s  %s\n%s\n",LUA_VERSION,LUA_COPYRIGHT,LUA_MODIFIED);
    if (argc==2) exit(EXIT_SUCCESS);
   }
   else					/* unknown option */

@@ -13,6 +13,11 @@ The most notable changes are:
 
 See [HISTORY](HISTORY) for a full list of changes.
 
+## Versioning
+Version numbers do not follow regular semantic versioning. Instead they use the
+Lua version that the modifications are based on followed by a release number.
+For example `5.0-1` would be release number 1 for changes based on Lua 5.0.
+
 ## Objective
 The purpose of this project is to provide SCFA modders with a version of Lua
 that has the same syntax and behavior as the GPG version integrated into SCFA.
