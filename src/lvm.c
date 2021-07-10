@@ -356,8 +356,8 @@ static void Arith (lua_State *L, StkId ra,
       case TM_SUB: setnvalue(ra, nvalue(b) - nvalue(c)); break;
       case TM_MUL: setnvalue(ra, nvalue(b) * nvalue(c)); break;
       case TM_DIV: setnvalue(ra, nvalue(b) / nvalue(c)); break;
-      case TM_POW: {
-        const TObject *f = luaH_getstr(hvalue(gt(L)), G(L)->tmname[TM_POW]);
+      case TM_XOR: {
+        const TObject *f = luaH_getstr(hvalue(gt(L)), G(L)->tmname[TM_XOR]);
         ptrdiff_t res = savestack(L, ra);
         if (!ttisfunction(f))
           luaG_runerror(L, "`__pow' (`^' operator) is not a function");
@@ -598,8 +598,14 @@ StkId luaV_execute (lua_State *L) {
           luaG_runerror(L, "`>>' operands must be numbers");
         break;
       }
-      case OP_POW: {
-        Arith(L, ra, RKB(i), RKC(i), TM_POW);
+      case OP_XOR: {
+        TObject *rb = RKB(i);
+        TObject *rc = RKC(i);
+        if (ttisnumber(rb) && ttisnumber(rc)) {
+          setnvalue(ra, (unsigned int) nvalue(rb) ^ (unsigned int) nvalue(rc));
+        }
+        else
+          Arith(L, ra, RKB(i), RKC(i), TM_XOR);
         break;
       }
       case OP_UNM: {

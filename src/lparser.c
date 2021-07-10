@@ -765,7 +765,7 @@ static BinOpr getbinopr (int op) {
     case '-': return OPR_SUB;
     case '*': return OPR_MULT;
     case '/': return OPR_DIV;
-    case '^': return OPR_POW;
+    case '^': return OPR_XOR;
     case TK_CONCAT: return OPR_CONCAT;
     case TK_NE: return OPR_NE;
     case TK_EQ: return OPR_EQ;
@@ -792,7 +792,8 @@ static const struct {
    {6, 6}, {6, 6},              		/* arithmetic (add/sub) */
 	 {7, 7}, {7, 7},             			/* arithmetic (mul/div) */
 	 {8, 8}, {8, 8}, {8, 8}, {8, 8},  /* bitwise (and/or/shl/shr) */
-	 {10, 9}, {5, 4},                 /* power and concat (right associative) */
+   {10, 9}, 												/* xor    (right associative!!!!) */
+	 {5, 4},                					/* concat (right associative) */
    {3, 3}, {3, 3},                  /* equality */
    {3, 3}, {3, 3}, {3, 3}, {3, 3},  /* order */
    {2, 2}, {1, 1}                   /* logical (and/or) */

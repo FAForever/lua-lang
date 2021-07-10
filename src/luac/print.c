@@ -116,7 +116,7 @@ static void PrintCode(const Proto* f)
    case OP_BOR:
    case OP_BSHL:
    case OP_BSHR:
-   case OP_POW:
+   case OP_XOR:
    case OP_EQ:
    case OP_LT:
    case OP_LE:

@@ -79,6 +79,22 @@ assert(2 >> -1 == 0)
 assert(1 << 1 == 2)
 print("passed bitwise shift")
 
+assert(2 ^ 2 == 0)
+assert(2 ^ 30 == 28)
+assert(0xF0F0 ^ 0x0F0F == 0xFFFF)
+assert(0xFFFF ^ 0x0F0F == 0xF0F0)
+print("passed xor")
+
+-- Supcom has some non-conventional operator precedence
+assert(2 ^ 30 - 1 == 27)
+assert((2 ^ 30) - (1 << 1) == 26)
+assert(2 ^ 30 - 1 << 1 == 26)
+assert(2 ^ 30 - 1 << 2 == 24)
+assert(2 ^ 30 - 1 << 3 == 20)
+-- NOTE: SupCom uses floats and therefore encounters rounding errors. Using
+-- doubles the answer would actually be -268435428.
+assert(2 ^ 30 - 1 << 2 ^ 30 == -268435424)
+
 -- some special cases
 -- Does not pass for 0xffffffff (too large)
 local c = {0, 1, 2, 3, 10, 0x80000000, 0xaaaaaaaa, 0x55555555, 0x7fffffff}
@@ -90,6 +106,10 @@ for _, b in pairs(c) do
   assert(b | 0 == b)
   assert(b | b == b)
   assert(b | b | b == b)
+  assert(b ^ b == 0)
+  assert(b ^ b ^ b == b)
+  assert(b ^ b ^ b ^ b == 0)
+  assert(b ^ 0 == b)
   print("  passed " .. b)
 end
 print("passed binary operators")

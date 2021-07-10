@@ -8,6 +8,7 @@ This is Lua 5.0 FAF version.
   + new inequality operator: !=
   + new single line comment: # ...
   + new binary operators &, |, << and >>
+  + operator ^ means xor instead of pow
   Implementation:
   + skip BOM and unix style # comments when reading files
 

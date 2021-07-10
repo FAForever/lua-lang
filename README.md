@@ -11,6 +11,7 @@ The most notable changes are:
 - Addition of a `continue` statement
 - Bash style single line `#` comments
 - Bitwise operators `&`, `|`, `<<`, and `>>`
+- Pow operator replaced by bitwise xor `^`
 
 See [HISTORY](HISTORY) for a full list of changes.
 

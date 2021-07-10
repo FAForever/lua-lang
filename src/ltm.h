@@ -25,7 +25,7 @@ typedef enum {
   TM_SUB,
   TM_MUL,
   TM_DIV,
-  TM_POW,
+  TM_XOR,
   TM_UNM,
   TM_LT,
   TM_LE,
