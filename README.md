@@ -10,6 +10,7 @@ Games (GPG) for the game Supreme Commander Forged Alliance (SCFA).
 The most notable changes are:
 - Addition of a `continue` statement
 - Bash style single line `#` comments
+- Bitwise operators `&`, `|`, `<<`, and `>>`
 
 See [HISTORY](HISTORY) for a full list of changes.
 

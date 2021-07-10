@@ -16,6 +16,7 @@
 
 #ifdef LUA_OPNAMES
 
+/* ORDER OP */
 const char *const luaP_opnames[] = {
   "MOVE",
   "LOADK",
@@ -33,6 +34,10 @@ const char *const luaP_opnames[] = {
   "SUB",
   "MUL",
   "DIV",
+  "BAND",
+  "BOR",
+  "BSHL",
+  "BSHR",
   "POW",
   "UNM",
   "NOT",
@@ -61,6 +66,7 @@ const char *const luaP_opnames[] = {
    ((sa)<<OpModesetA) | ((k)<<OpModeK) | (m))
 
 
+/* ORDER OP ? */
 const lu_byte luaP_opmodes[NUM_OPCODES] = {
 /*       T  B Bk Ck sA  K  mode			   opcode    */
   opmode(0, 1, 0, 0, 1, 0, iABC)		/* OP_MOVE */
@@ -79,6 +85,10 @@ const lu_byte luaP_opmodes[NUM_OPCODES] = {
  ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_SUB */
  ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_MUL */
  ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_DIV */
+ ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_BAND */
+ ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_BOR */
+ ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_BSHL */
+ ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_BSHR */
  ,opmode(0, 0, 1, 1, 1, 0, iABC)		/* OP_POW */
  ,opmode(0, 1, 0, 0, 1, 0, iABC)		/* OP_UNM */
  ,opmode(0, 1, 0, 0, 1, 0, iABC)		/* OP_NOT */
@@ -99,4 +109,3 @@ const lu_byte luaP_opmodes[NUM_OPCODES] = {
  ,opmode(0, 0, 0, 0, 0, 0, iABC)		/* OP_CLOSE */
  ,opmode(0, 0, 0, 0, 1, 0, iABx)		/* OP_CLOSURE */
 };
-

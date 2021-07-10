@@ -61,3 +61,35 @@ assert(0x0 == 0)
 assert(0x1234 == 4660)
 assert(0x2p30 == 2147483648)
 print("passed hex literal")
+
+assert(1 & 2 == 0)
+assert(0xF0 & 0x0F == 0x00)
+assert(0x3C & 0xFF == 0x3C)
+assert(1 | 2 == 3)
+assert(0xF0 | 0x0F == 0xFF)
+assert(0x3C | 0xFF == 0xFF)
+-- Associativity
+assert(8 | 3 & 4 == 0)
+assert(2 & 2 * 3 == 6)
+print("passed bitwise and/or")
+
+assert(1 >> -3 == 0)
+assert(1 << 3 == 8)
+assert(2 >> -1 == 0)
+assert(1 << 1 == 2)
+print("passed bitwise shift")
+
+-- some special cases
+-- Does not pass for 0xffffffff (too large)
+local c = {0, 1, 2, 3, 10, 0x80000000, 0xaaaaaaaa, 0x55555555, 0x7fffffff}
+for _, b in pairs(c) do
+  assert(b & 0 == 0)
+  assert(b & b == b)
+  assert(b & b & b == b)
+  assert(b & b & b & b == b)
+  assert(b | 0 == b)
+  assert(b | b == b)
+  assert(b | b | b == b)
+  print("  passed " .. b)
+end
+print("passed binary operators")

@@ -775,17 +775,24 @@ static BinOpr getbinopr (int op) {
     case TK_GE: return OPR_GE;
     case TK_AND: return OPR_AND;
     case TK_OR: return OPR_OR;
+		case '&': return OPR_BAND;
+		case '|': return OPR_BOR;
+    case TK_BSHL: return OPR_BSHL;
+    case TK_BSHR: return OPR_BSHR;
     default: return OPR_NOBINOPR;
   }
 }
 
-
+/* The priorities may seem very strange here, but this is how they appear in
+the exe... */
 static const struct {
   lu_byte left;  /* left priority for each binary operator */
   lu_byte right; /* right priority */
 } priority[] = {  /* ORDER OPR */
-   {6, 6}, {6, 6}, {7, 7}, {7, 7},  /* arithmetic */
-   {10, 9}, {5, 4},                 /* power and concat (right associative) */
+   {6, 6}, {6, 6},              		/* arithmetic (add/sub) */
+	 {7, 7}, {7, 7},             			/* arithmetic (mul/div) */
+	 {8, 8}, {8, 8}, {8, 8}, {8, 8},  /* bitwise (and/or/shl/shr) */
+	 {10, 9}, {5, 4},                 /* power and concat (right associative) */
    {3, 3}, {3, 3},                  /* equality */
    {3, 3}, {3, 3}, {3, 3}, {3, 3},  /* order */
    {2, 2}, {1, 1}                   /* logical (and/or) */

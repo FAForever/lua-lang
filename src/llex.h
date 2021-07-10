@@ -28,8 +28,10 @@ enum RESERVED {
   TK_IF, TK_IN, TK_LOCAL, TK_NIL, TK_NOT, TK_OR, TK_REPEAT,
   TK_RETURN, TK_THEN, TK_TRUE, TK_UNTIL, TK_WHILE,
   /* other terminal symbols */
-  TK_NAME, TK_CONCAT, TK_DOTS, TK_EQ, TK_GE, TK_LE, TK_NE, TK_NUMBER,
-  TK_STRING, TK_EOS
+  TK_NAME, TK_CONCAT, TK_DOTS, TK_EQ, TK_GE, TK_LE, TK_NE,
+  TK_NUMBER, TK_STRING,
+  /* This is where the tokens appear in SupremeCommander.exe */
+  TK_BSHL, TK_BSHR, TK_EOS
 };
 
 /* number of reserved words */

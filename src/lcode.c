@@ -376,7 +376,7 @@ void luaK_exp2nextreg (FuncState *fs, expdesc *e) {
 int luaK_exp2anyreg (FuncState *fs, expdesc *e) {
   luaK_dischargevars(fs, e);
   if (e->k == VNONRELOC) {
-    if (!hasjumps(e)) return e->info;  /* exp is already in a register */ 
+    if (!hasjumps(e)) return e->info;  /* exp is already in a register */
     if (e->info >= fs->nactvar) {  /* reg. is not a local? */
       luaK_exp2reg(fs, e, e->info);  /* put value on it */
       return e->info;
@@ -622,7 +622,7 @@ void luaK_infix (FuncState *fs, BinOpr op, expdesc *v) {
 
 static void codebinop (FuncState *fs, expdesc *res, BinOpr op,
                        int o1, int o2) {
-  if (op <= OPR_POW) {  /* arithmetic operator? */
+  if (op <= OPR_POW) {  /* arithmetic/bitwise operator? */
     OpCode opc = cast(OpCode, (op - OPR_ADD) + OP_ADD);  /* ORDER OP */
     res->info = luaK_codeABC(fs, opc, 0, o1, o2);
     res->k = VRELOCABLE;
@@ -715,4 +715,3 @@ int luaK_codeABx (FuncState *fs, OpCode o, int a, unsigned int bc) {
   lua_assert(getOpMode(o) == iABx || getOpMode(o) == iAsBx);
   return luaK_code(fs, CREATE_ABx(o, a, bc), fs->ls->lastline);
 }
-

@@ -186,7 +186,7 @@ void luaV_settable (lua_State *L, const TObject *t, TObject *key, StkId val) {
       callTM(L, tm, t, key, val);
       return;
     }
-    t = tm;  /* else repeat with `tm' */ 
+    t = tm;  /* else repeat with `tm' */
   } while (++loop <= MAXTAGLOOP);
   luaG_runerror(L, "loop in settable");
 }
@@ -558,6 +558,46 @@ StkId luaV_execute (lua_State *L) {
           Arith(L, ra, rb, rc, TM_DIV);
         break;
       }
+      case OP_BAND: {
+        TObject *rb = RKB(i);
+        TObject *rc = RKC(i);
+        if (ttisnumber(rb) && ttisnumber(rc)) {
+          setnvalue(ra, (unsigned int) nvalue(rb) & (unsigned int) nvalue(rc));
+        }
+        else
+          luaG_runerror(L, "`&' operands must be numbers");
+        break;
+      }
+      case OP_BOR: {
+        TObject *rb = RKB(i);
+        TObject *rc = RKC(i);
+        if (ttisnumber(rb) && ttisnumber(rc)) {
+          setnvalue(ra, (unsigned int) nvalue(rb) | (unsigned int) nvalue(rc));
+        }
+        else
+          luaG_runerror(L, "`|' operands must be numbers");
+        break;
+      }
+      case OP_BSHL: {
+        TObject *rb = RKB(i);
+        TObject *rc = RKC(i);
+        if (ttisnumber(rb) && ttisnumber(rc)) {
+          setnvalue(ra, (unsigned int) nvalue(rb) << (unsigned int) nvalue(rc));
+        }
+        else
+          luaG_runerror(L, "`<<' operands must be numbers");
+        break;
+      }
+      case OP_BSHR: {
+        TObject *rb = RKB(i);
+        TObject *rc = RKC(i);
+        if (ttisnumber(rb) && ttisnumber(rc)) {
+          setnvalue(ra, (unsigned int) nvalue(rb) >> (unsigned int) nvalue(rc));
+        }
+        else
+          luaG_runerror(L, "`>>' operands must be numbers");
+        break;
+      }
       case OP_POW: {
         Arith(L, ra, RKB(i), RKC(i), TM_POW);
         break;
@@ -777,5 +817,3 @@ StkId luaV_execute (lua_State *L) {
     }
   }
 }
-
-

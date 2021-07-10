@@ -7,6 +7,7 @@ This is Lua 5.0 FAF version.
   + new keyword `continue'
   + new inequality operator: !=
   + new single line comment: # ...
+  + new binary operators &, |, << and >>
   Implementation:
   + skip BOM and unix style # comments when reading files
 
