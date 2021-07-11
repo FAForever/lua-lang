@@ -16,8 +16,7 @@ jobs:
       - name: Build lua
         run: make \
           MYCFLAGS='-O3 -fomit-frame-pointer' \
-          EXTRA_LIBS='-lm -ldl' \
-          NUMBER='-DLUA_USER_H="\"../etc/luser_number.h"\" -DUSE_FLOAT'
+          EXTRA_LIBS='-lm -ldl'
 
       - name: Run tests
         run: ./bin/lua test/faf.lua

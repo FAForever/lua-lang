@@ -8,7 +8,6 @@ COPY . /code/
 RUN make \
   MYCFLAGS='-O3 -fomit-frame-pointer' \
   EXTRA_LIBS='-lm -ldl' \
-  NUMBER='-DLUA_USER_H="\"../etc/luser_number.h"\" -DUSE_FLOAT' \
   install
 
 # Main entrypoint and the default command that will be run
