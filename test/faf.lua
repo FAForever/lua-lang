@@ -120,6 +120,8 @@ assert(str:sub(2) == "bcdefghijklmnop")
 assert(str:sub(2, -2) == "bcdefghijklmno")
 assert(str:sub(2, 8) == "bcdefgh")
 
+assert(str:lualex() == str)
+
 local string_func_names = {}
 local n=0
 
@@ -129,6 +131,7 @@ for k in string do
 end
 assert(table.concat(string_func_names) == table.concat({
   "sub",
+  "lualex",
   "gfind",
   "rep",
   "gsub",

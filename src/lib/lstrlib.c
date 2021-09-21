@@ -743,6 +743,12 @@ static int str_format (lua_State *L) {
 }
 
 
+static int str_lualex (lua_State *L) {
+  // TODO: Implement
+  return 1;
+}
+
+
 static const luaL_reg strlib[] = {
   {"len", str_len},
   {"sub", str_sub},
@@ -756,6 +762,7 @@ static const luaL_reg strlib[] = {
   {"find", str_find},
   {"gfind", gfind},
   {"gsub", str_gsub},
+  {"lualex", str_lualex},
   {NULL, NULL}
 };
 
