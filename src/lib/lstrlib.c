@@ -760,11 +760,22 @@ static const luaL_reg strlib[] = {
 };
 
 
+static void createmetatable (lua_State *L) {
+  lua_newtable(L);  /* create metatable for strings */
+  lua_pushliteral(L, "__index");  /* dummy string, but also the metamethod */
+  lua_pushvalue(L, -2);
+  lua_setmetatable(L, -2);  /* set string metatable */
+  lua_pushvalue(L, -3);  /* string library... */
+  lua_settable(L, -3);  /* ...is the __index metamethod */
+  lua_pop(L, 1);  /* pop metatable */
+}
+
+
 /*
 ** Open string library
 */
 LUALIB_API int luaopen_string (lua_State *L) {
   luaL_openlib(L, LUA_STRLIBNAME, strlib, 0);
+  createmetatable(L);
   return 1;
 }
-

@@ -113,3 +113,33 @@ for _, b in pairs(c) do
   print("  passed " .. b)
 end
 print("passed binary operators")
+
+str = "abcdefghijklmnop"
+assert(str:sub(-2) == "op")
+assert(str:sub(2) == "bcdefghijklmnop")
+assert(str:sub(2, -2) == "bcdefghijklmno")
+assert(str:sub(2, 8) == "bcdefgh")
+
+local string_func_names = {}
+local n=0
+
+for k in string do
+  n=n+1
+  string_func_names[n]=k
+end
+assert(table.concat(string_func_names) == table.concat({
+  "sub",
+  "gfind",
+  "rep",
+  "gsub",
+  "char",
+  "dump",
+  "find",
+  "upper",
+  "len",
+  "format",
+  "byte",
+  "lower"
+}))
+
+print("passed string library")

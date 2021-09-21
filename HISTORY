@@ -9,6 +9,7 @@ This is Lua 5.0 FAF version.
   + new single line comment: # ...
   + new binary operators &, |, << and >>
   + operator ^ means xor instead of pow
+  + metatable for strings pointing at `string' library
   Implementation:
   + skip BOM and unix style # comments when reading files
 

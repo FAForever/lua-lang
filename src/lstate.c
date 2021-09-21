@@ -88,6 +88,7 @@ static void freestack (lua_State *L, lua_State *L1) {
 */
 static void f_luaopen (lua_State *L, void *ud) {
   /* create a new global state */
+  int i;
   global_State *g = luaM_new(NULL, global_State);
   UNUSED(ud);
   if (g == NULL) luaD_throw(L, LUA_ERRMEM);
@@ -108,6 +109,7 @@ static void f_luaopen (lua_State *L, void *ud) {
   setnilvalue(gval(g->dummynode));
   g->dummynode->next = NULL;
   g->nblocks = sizeof(lua_State) + sizeof(global_State);
+  for (i=0; i<NUM_TAGS; i++) g->mt[i] = NULL;
   stack_init(L, L);  /* init stack */
   /* create default meta table with a dummy table, and then close the loop */
   defaultmeta(L)->tt = LUA_TTABLE;
@@ -217,4 +219,3 @@ LUA_API void lua_close (lua_State *L) {
   lua_assert(G(L)->tmudata == NULL);
   close_state(L);
 }
-
