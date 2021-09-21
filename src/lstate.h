@@ -22,7 +22,7 @@
 ** a thread must also synchronize any write-access to its own stack.
 ** Unsynchronized accesses are allowed only when reading its own stack,
 ** or when reading immutable fields from global objects
-** (such as string values and udata values). 
+** (such as string values and udata values).
 */
 #ifndef lua_lock
 #define lua_lock(L)	((void) 0)
@@ -121,6 +121,7 @@ typedef struct global_State {
   TObject _defaultmeta;
   struct lua_State *mainthread;
   Node dummynode[1];  /* common node array for all empty tables */
+  struct Table *mt[NUM_TAGS];  /* metatables for basic types */
   TString *tmname[TM_N];  /* array with tag-method names */
 } global_State;
 
@@ -192,4 +193,3 @@ lua_State *luaE_newthread (lua_State *L);
 void luaE_freethread (lua_State *L, lua_State *L1);
 
 #endif
-

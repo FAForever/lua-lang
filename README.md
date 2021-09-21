@@ -12,6 +12,7 @@ The most notable changes are:
 - Bash style single line `#` comments
 - Bitwise operators `&`, `|`, `<<`, and `>>`
 - Pow operator replaced by bitwise xor `^`
+- String methods available on strings. i.e. `str:sub(2)`
 
 See [HISTORY](HISTORY) for a full list of changes.
 

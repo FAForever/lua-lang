@@ -534,6 +534,9 @@ LUA_API int lua_getmetatable (lua_State *L, int objindex) {
       case LUA_TUSERDATA:
         mt = uvalue(obj)->uv.metatable;
         break;
+      default:
+        mt = G(L)->mt[ttype(obj)];
+        break;
     }
   }
   if (mt == NULL || mt == hvalue(defaultmeta(L)))
@@ -616,7 +619,7 @@ LUA_API int lua_setmetatable (lua_State *L, int objindex) {
       break;
     }
     default: {
-      res = 0;  /* cannot set */
+      G(L)->mt[ttype(obj)] = hvalue(mt);
       break;
     }
   }
@@ -919,4 +922,3 @@ LUA_API const char *lua_setupvalue (lua_State *L, int funcindex, int n) {
   lua_unlock(L);
   return name;
 }
-

@@ -450,12 +450,21 @@ void luaC_sweep (lua_State *L, int all) {
 }
 
 
+static void markmt (GCState *st) {
+  int i;
+  global_State *g = st->g;
+  for (i=0; i<NUM_TAGS; i++)
+    if (g->mt[i]) markvalue(st, g->mt[i]);
+}
+
+
 /* mark root set */
 static void markroot (GCState *st, lua_State *L) {
   global_State *g = st->g;
   markobject(st, defaultmeta(L));
   markobject(st, registry(L));
   traversestack(st, g->mainthread);
+  markmt(st);
   if (L != g->mainthread)  /* another thread is running? */
     markvalue(st, L);  /* cannot collect it */
 }
@@ -502,4 +511,3 @@ void luaC_link (lua_State *L, GCObject *o, lu_byte tt) {
   o->gch.marked = 0;
   o->gch.tt = tt;
 }
-

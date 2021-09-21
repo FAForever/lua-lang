@@ -57,14 +57,16 @@ const TObject *luaT_gettm (Table *events, TMS event, TString *ename) {
 
 
 const TObject *luaT_gettmbyobj (lua_State *L, const TObject *o, TMS event) {
-  TString *ename = G(L)->tmname[event];
+  Table *mt;
   switch (ttype(o)) {
     case LUA_TTABLE:
-      return luaH_getstr(hvalue(o)->metatable, ename);
+      mt = hvalue(o)->metatable;
+      break;
     case LUA_TUSERDATA:
-      return luaH_getstr(uvalue(o)->uv.metatable, ename);
+      mt = uvalue(o)->uv.metatable;
+      break;
     default:
-      return &luaO_nilobject;
+      mt = G(L)->mt[ttype(o)];
   }
+  return (mt ? luaH_getstr(mt, G(L)->tmname[event]) : &luaO_nilobject);
 }
-
