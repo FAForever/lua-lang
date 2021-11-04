@@ -18,3 +18,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tag_with_ref: true
+
+  binaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build lua
+        run: make \
+          MYCFLAGS='-O3 -fomit-frame-pointer' \
+          USERCONF='-DLUA_USERCONFIG=\'"$(LUA)/etc/saconfig.c"\' -DUSE_READLINE' \
+          EXTRA_LIBS='-lm -ldl -lreadline -lhistory'
+
+      - name: Upload Release Asset
+        uses: alexellis/upload-assets@0.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          asset_paths: '["./bin/*"]'
