@@ -28,17 +28,17 @@ jobs:
         run: make \
           MYCFLAGS='-O3 -fomit-frame-pointer' \
           USERCONF=$'-DLUA_USERCONFIG=\'"$(LUA)/etc/saconfig.c"\' -DUSE_READLINE' \
-          EXTRA_LIBS='-lm -ldl -lreadline -lhistory'
+          EXTRA_LIBS='-lm -ldl -lreadline -lhistory' all strip
 
       - name: Create archive
         run: |
-          mkdir faf-lua-linux
-          cp --parents -t faf-lua-linux bin/* include/*.h lib/*.a doc/*.1
-          tar -czf faf-lua-linux.tar.gz faf-lua-linux
+          export ARCHIVE=faf-lua-${GITHUB_REF#refs/*/v}-linux
+          cp --parents -t $ARCHIVE bin/* include/*.h lib/*.a doc/*.1
+          tar -czf $ARCHIVE.tar.gz faf-lua-linux
 
       - name: Upload release asset
         uses: alexellis/upload-assets@0.2.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          asset_paths: '["faf-lua-linux.tar.gz"]'
+          asset_paths: '["faf-lua-*-linux.tar.gz"]'
