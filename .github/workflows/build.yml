@@ -27,11 +27,14 @@ jobs:
       - name: Build lua
         run: make \
           MYCFLAGS='-O3 -fomit-frame-pointer' \
-          USERCONF=$'-DLUA_USERCONFIG=\'"../etc/saconfig.c"\' -DUSE_READLINE' \
+          USERCONF=$'-DLUA_USERCONFIG=\'"$(LUA)/etc/saconfig.c"\' -DUSE_READLINE' \
           EXTRA_LIBS='-lm -ldl -lreadline -lhistory'
 
       - name: Create archive
-        run: tar -czf faf-lua-linux.tar.gz bin/* include/*.h lib/*.a doc/*.1
+        run: |
+          mkdir faf-lua-linux
+          cp --parents -t faf-lua-linux bin/* include/*.h lib/*.a doc/*.1
+          tar -czf faf-lua-linux.tar.gz faf-lua-linux
 
       - name: Upload release asset
         uses: alexellis/upload-assets@0.2.2
