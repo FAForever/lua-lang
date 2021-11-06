@@ -27,7 +27,7 @@ jobs:
       - name: Build lua
         run: make \
           MYCFLAGS='-O3 -fomit-frame-pointer' \
-          USERCONF=$'-DLUA_USERCONFIG="./etc/saconfig.c" -DUSE_READLINE' \
+          USERCONF=$'-DLUA_USERCONFIG=\'"../etc/saconfig.c"\' -DUSE_READLINE' \
           EXTRA_LIBS='-lm -ldl -lreadline -lhistory'
 
       - name: Create archive
