@@ -146,3 +146,8 @@ assert(table.concat(string_func_names) == table.concat({
 }))
 
 print("passed string library")
+
+prealloc_t = {&5};
+prealloc_t = {&5 &1};
+
+print("passed const construction of a table")
